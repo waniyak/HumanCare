@@ -1,0 +1,90 @@
+﻿@model HumanCare.Models.ContactUs
+
+@{
+    ViewData["Title"] = "ContactUs";
+
+}
+<div class="page-heading text-center">
+
+    <div class="container zoomIn animated">
+
+        <h1 class="page-title">CONTACT US <span class="title-under"></span></h1>
+        <p class="page-description">
+            <h1>"You can also visit our Help Center for additional information"</h1>
+        </p>
+
+    </div>
+
+</div>
+
+<div class="main-container fadeIn animated">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-md-7 col-sm-12">
+                <h2 class="title-style-2">CONTACT FORM <span class="title-under"></span></h2>
+
+                <form asp-action="ContactUs" method="post" class="contact-form">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <input asp-for="Firstname" class="form-control" placeholder="First name" required>
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input asp-for="Lastname" class="form-control" placeholder="Last name" required>
+                            <span asp-validation-for="Lastname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input asp-for="Email" type="email" class="form-control" placeholder="E-mail" required>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input asp-for="Phone" type="tel" class="form-control" placeholder="Phone Number" required>
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea asp-for="Message" rows="5" class="form-control" placeholder="Message*" required></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary float-end">Send message</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-md-4 ms-md-auto">
+                <h2 class="title-style-2">HCF CONTACTS <span class="title-under"></span></h2>
+                <p>
+                    <b>Connect with Us. We're Here for You.</b>
+                </p>
+                <div class="contact-items">
+                    <ul class="list-unstyled contact-items-list">
+                        <li class="contact-item">
+                            <span class="contact-icon"> <i class="fa fa-map-marker-alt"></i></span>
+                            SD-1 , Block A North Nazimabad Town
+                        </li>
+                        <li class="contact-item">
+                            <span class="contact-icon"> <i class="fa fa-phone-alt"></i></span>
+                            00 210 25 55 55 11
+                        </li>
+                        <li class="contact-item">
+                            <span class="contact-icon"> <i class="fa fa-envelope"></i></span>
+                            contact@HCF.COM
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.main-container -->
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,31 @@
+﻿@using System.Collections.Generic
+
+@model IEnumerable<HumanCare.Models.Partner>
+
+@{
+    ViewData["Title"] = "OurPartner";
+  
+}
+<h2 class="text-center mb-4" >Our Partner</h2>
+
+
+
+
+<div class="container " style="margin-bottom:20px;">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="team-member">
+                    <div class="thumbnail">
+                        <img src="~/images/@item.Photo" alt="@item.Name" class="cause-img" style="width:100%; height:200px;" />
+                    </div>
+                    <h4 class="member-name"><a href="#">@item.Name</a></h4>
+                    <div class="member-position">
+                        @item.Description
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Dashboard - HumanCare";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        .card {
+            border: none;
+            border-radius: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom:100px;
+           
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: bold;
+            font-size:2rem;
+            color: #333;
+            padding: 25px;
+        }
+
+        .card-body {
+            text-align: center;
+            padding: 25px;
+            color:white;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .bg-primary {
+            background-color: #007bff !important;
+        }
+
+        .bg-success {
+            background-color: #28a745 !important;
+        }
+
+        .bg-warning {
+            background-color: #ffc107 !important;
+        }
+
+        .bg-danger {
+            background-color: #dc3545 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mb-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-4">
+                    <div class="card-header">Total Users</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.UserCount</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-4">
+                    <div class="card-header">Total Donations</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.DonationCount</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-4">
+                    <div class="card-header">Total Partners</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.PartnerCount</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-4">
+                    <div class="card-header">Total NGOs</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.NgoCount</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

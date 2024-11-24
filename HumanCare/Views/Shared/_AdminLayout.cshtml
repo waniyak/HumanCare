@@ -1,0 +1,335 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "HumanCare";
+    string username = "";
+    bool isLoggedIn = false;
+    string userRole = "";
+
+    var isLoggedInString = HttpContextAccessor.HttpContext.Session.GetString("IsLoggedIn");
+    if (isLoggedInString == "true")
+    {
+        isLoggedIn = true;
+        username = HttpContextAccessor.HttpContext.Session.GetString("Username");
+        userRole = HttpContextAccessor.HttpContext.Session.GetString("UserRole");
+    }
+    if (!isLoggedIn || userRole != "Admin")
+    {
+        HttpContextAccessor.HttpContext.Response.Redirect("/Account/Login");
+    }
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HumanCare</title>
+
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700"
+          rel="stylesheet"
+          type="text/css" asp-append-version="true" />
+    <link href="http://fonts.googleapis.com/css?family=Dosis:400,700"
+          rel="stylesheet"
+          type="text/css" asp-append-version="true" />
+
+
+    <link rel="stylesheet" href="~/HumanCare.styles.css" asp-append-version="true" />
+
+
+    <!-- Bootsrap -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css" asp-append-version="true" />
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" asp-append-version="true" />
+
+    <!-- Owl carousel -->
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.css" asp-append-version="true" />
+
+    <!-- Template main Css -->
+    <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />
+
+    <!-- Modernizr -->
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <ul class="list-unstyled list-inline header-contact">
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    <a href="tel:">+212 658 986 213 </a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="mailto:contact@sadaka.org">contact@sadaka.org</a>
+                                </li>
+                            </ul>
+                            <!-- /.header-contact  -->
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12 text-right">
+                            <ul class="list-unstyled list-inline header-social">
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="fa fa-google"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="fa fa-youtube"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="fa fa fa-pinterest-p"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.header-social  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-main">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button"
+                                class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target="#navbar"
+                                aria-expanded="false"
+                                aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbsubmenu-itemar-brand" href="index.html">
+                            <img src="~/assets/images/logo.png" alt="" />
+                        </a>
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse pull-right">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="AboutUsData">AboutUsData</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="ListUsers">All users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Partners" asp-action="OurPartners">Our Partners</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Ngo" asp-action="NgoList">All NGOs</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="ContactData">User Contact</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="DonationList">User Donations</a>
+                            </li>
+
+
+                            @if (isLoggedIn)
+                            {
+                                <li class="nav-item">
+                                    <span class="nav-link text-dark">Hello @username!</span>
+                                </li>
+                                <li class="nav-item">
+                                    <form id="logoutForm" class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
+                                        <input type="hidden" name="returnUrl" value="@Url.Action("Login", "Account", new { area = "" })" />
+                                        <input type="submit" id="logout-btn" class="nav-link" value="Logout">
+                                    </form>
+                                </li>
+                            }
+                           
+                        </ul>
+
+
+
+                    </div>
+                    <!-- /#navbar -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /.navbar-main -->
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-top"></div>
+
+        <div class="footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-col">
+                            <h4 class="footer-title">
+                                About us <span class="title-under"></span>
+                            </h4>
+
+                            <div class="footer-content">
+                                <p>
+                                    Society and governments aren't set up to protect everyone
+                                    who needs it. That's why charities are here to fill the gaps
+                                    and provide dedicated resources to help the most vulnerable.
+                                    For children, they rely on their parents or carers to give
+                                    them safety, guidance, and access to life's necessities. A
+                                    charity's aims have to fall into categories that the law
+                                    says are charitable. These are things like preventing or
+                                    relieving poverty, or advancing the arts, culture, heritage
+                                    or science.
+                                </p>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="footer-col">
+                            <h4 class="footer-title">
+                                LAST TWEETS <span class="title-under"></span>
+                            </h4>
+
+                            <div class="footer-content">
+                                <ul class="tweets list-unstyled">
+                                    <li class="tweet">
+                                        It's not how much we give but how much love we put into
+                                        giving. If you haven't got any charity in your heart, you
+                                        have the worst kind of heart trouble.
+                                    </li>
+
+                                    <li class="tweet">
+                                        Every good act is charity. A man's true wealth hereafter
+                                        is the good that he does in this world to his fellows
+                                    </li>
+
+                                    <li class="tweet">
+                                        We know you have a lot of choices when it comes to
+                                        donating, and we are so grateful that you chose to donate
+                                        to our cause.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="footer-col">
+                            <h4 class="footer-title">
+                                Contact us <span class="title-under"></span>
+                            </h4>
+
+                            <div class="footer-content">
+                                <div class="footer-form">
+                                    <div class="footer-form">
+                                        <form action="php/mail.php" class="ajax-form">
+                                            <div class="form-group">
+                                                <input type="First name"
+                                                       name="First name"
+                                                       class="form-control"
+                                                       placeholder="First name"
+                                                       required />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="Last name"
+                                                       name="Last name"
+                                                       class="form-control"
+                                                       placeholder="Last name"
+                                                       required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="email"
+                                                       name="email"
+                                                       class="form-control"
+                                                       placeholder="E-mail"
+                                                       required />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="Phone Number"
+                                                       name="Phone Number"
+                                                       class="form-control"
+                                                       placeholder="Phone Number"
+                                                       required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <textarea name="message"
+                                                          class="form-control"
+                                                          placeholder="Message"
+                                                          required></textarea>
+                                            </div>
+
+                                            <div class="form-group alerts">
+                                                <div class="alert alert-success" role="alert"></div>
+
+                                                <div class="alert alert-danger" role="alert"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="submit"
+                                                        class="btn btn-submit pull-right">
+                                                    Send message
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+        </div>
+    </footer>
+    @*     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    *@
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/modernizr-2.6.2.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

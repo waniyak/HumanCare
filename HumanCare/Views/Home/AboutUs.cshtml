@@ -1,0 +1,41 @@
+﻿@model HumanCare.Models.AboutUs
+
+@{
+    ViewData["Title"] = "AboutUs";
+
+}
+
+
+<div class="page-heading text-center">
+    <div class="container zoomIn animated">
+        <h1 class="page-title">ABOUT US <span class="title-under"></span></h1>
+        <p class="page-description">"Together We Care, Together We Heal"</p>
+    </div>
+</div>
+
+
+<div class="main-container">
+    <div id="wedo">
+        <div class="container">
+            <div class="row fadeIn animated">
+                <div class="col-md-6">
+                    <img src="~/assets/images/pic.jpg" alt="About Us" class="img-responsive">
+                </div>
+
+                <div class="col-md-6">
+                    <h2 class="title-style-1">
+                        Read About Us <span class="title-under"></span>
+                    </h2>
+
+                    <div class="content-special-one">
+                        <!-- Use <pre> to preserve whitespace or <div> with CSS -->
+                        <p>@Model.Content</p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

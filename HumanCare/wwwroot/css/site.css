@@ -1,0 +1,35 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+#logout-btn {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    color: #007bff; /* Match the color of your navigation links */
+    font-size: 1rem; /* Adjust font size to match other links */
+    padding: 0; /* Remove default padding */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+}
+
+    #logout-btn:hover {
+        text-decoration: underline; /* Underline on hover for consistency */
+    }
